@@ -54,6 +54,24 @@
     };
   };
 
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      "vps" = {
+        hostname = "94.72.96.38";
+        user = "christos";
+        port = 49153;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+  };
+
   programs.git = {
   enable = true;
   signing.format = null;
