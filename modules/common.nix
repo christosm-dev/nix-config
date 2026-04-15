@@ -43,7 +43,7 @@
       g   = "git";
       k   = "kubectl";
       tf  = "opentofu";
-      nvi = "neovim";
+      nv  = "nvim";
     };
     sessionVariables = {
       EDITOR = "nvim";

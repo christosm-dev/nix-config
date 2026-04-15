@@ -7,7 +7,7 @@
 ## Bootstrap
 
 ### Prerequisites
-- WSL2 Ubuntu instance
+- WSL2 Ubuntu instance with xmixa username on thinkpad25 host
 - SSH key at `~/.ssh/id_ed25519` configured for GitHub
 
 ### 1. Install Nix (multi-user)
@@ -23,24 +23,35 @@ echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.con
 sudo systemctl restart nix-daemon
 ```
 
-### 3. Add Nix to PATH
-
-```bash
-echo 'export PATH="$HOME/.nix-profile/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-### 4. Clone repo
+### 3. Clone repo
 
 ```bash
 git clone git@github.com:christosm-dev/nix-config.git ~/.config/home-manager
 cd ~/.config/home-manager
 ```
 
-### 5. Apply configuration
+### 4. Apply configuration
+
+Back up the default shell files that Home Manager will replace:
 
 ```bash
-nix run nixpkgs#home-manager -- switch --flake .#"xmixa@thinkpad25"
+mv ~/.bashrc ~/.bashrc.bak
+mv ~/.profile ~/.profile.bak
+```
+
+Then apply using `nix run` to avoid needing `home-manager` on PATH:
+
+```bash
+nix run nixpkgs#home-manager -- switch --flake ~/.config/home-manager#"xmixa@thinkpad25"
+```
+
+After this completes, Home Manager manages `.bashrc` and the Nix PATH fix is
+handled automatically on all subsequent shells.
+
+### 5. Reload shell
+
+```bash
+source ~/.bashrc
 ```
 
 ### 6. Reload shell
