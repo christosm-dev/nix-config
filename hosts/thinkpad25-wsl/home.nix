@@ -9,6 +9,9 @@
 #    Neovim — stripped automatically via BufReadPost autocmd.
 { pkgs, ... }: {
 
+  home.username = "xmixa";
+  home.homeDirectory = "/home/xmixa";
+
   # Bash — WSL2-specific shell initialisation
   # Adds Nix profile to PATH and sources Home Manager session variables.
   # This is required because the standard Nix shell integration script
