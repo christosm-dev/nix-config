@@ -32,29 +32,13 @@ cd ~/.config/home-manager
 
 ### 4. Apply configuration
 
-Back up the default shell files that Home Manager will replace:
+Apply using `nix run` to avoid needing `home-manager` on PATH:
 
 ```bash
-mv ~/.bashrc ~/.bashrc.bak
-mv ~/.profile ~/.profile.bak
+nix run nixpkgs#home-manager -- switch -b backup --flake ~/.config/home-manager#"xmixa@thinkpad25"
 ```
-
-Then apply using `nix run` to avoid needing `home-manager` on PATH:
-
-```bash
-nix run nixpkgs#home-manager -- switch --flake ~/.config/home-manager#"xmixa@thinkpad25"
-```
-
-After this completes, Home Manager manages `.bashrc` and the Nix PATH fix is
-handled automatically on all subsequent shells.
 
 ### 5. Reload shell
-
-```bash
-source ~/.bashrc
-```
-
-### 6. Reload shell
 
 ```bash
 source ~/.bashrc
