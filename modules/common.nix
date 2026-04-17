@@ -26,7 +26,9 @@
     eza        # modern ls replacement
     fzf        # fuzzy finder
     jq         # JSON processor
-    opentofu   # Terraform 
+    terraform  # Terraform
+    usbutils
+    unzip
   ];
 
   # Bash — aliases, history and environment
@@ -42,7 +44,7 @@
       cat = "bat";
       g   = "git";
       k   = "kubectl";
-      tf  = "opentofu";
+      tf  = "terraform";
       nv  = "nvim";
     };
     sessionVariables = {
