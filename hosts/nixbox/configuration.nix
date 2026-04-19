@@ -9,21 +9,22 @@
     ./hardware-configuration.nix  # generated during nixos-install
   ];
 
-  # Bootloader
-  boot.loader.grub.device = "/dev/sda";
+  # Bootloader — UEFI only, no grub MBR
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Networking
   networking.hostName = "nixbox";
   networking.useDHCP = false;
-  # Static IP - reliable headless boot without DHCP negotiation delay
   networking.interfaces.enp1s0.ipv4.addresses = [{
     address = "192.168.0.24";
     prefixLength = 24;
   }];
   networking.defaultGateway = "192.168.0.1";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+
+  # Fix headless boot - disable NetworkManager wait online service
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Timezone and locale
   time.timeZone = "Europe/London";
