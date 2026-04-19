@@ -123,6 +123,11 @@
         port = 49153;
         identityFile = "~/.ssh/id_ed25519";
       };
+      "nixbox" = {
+        hostname = "192.168.0.24";
+        user = "cm";
+        identityFile = "~/.ssh/id_ed25519";
+      };
     };
   };
 }
