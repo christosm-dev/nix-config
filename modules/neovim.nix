@@ -109,7 +109,7 @@
       })
 
       -- nvim-tree keymaps
-      vim.keymap.set("n", "<leader>e",  ":NvimTreeToggle<CR>",   { desc = "Toggle file tree" })
+      vim.keymap.set("n", "<F2>",       ":NvimTreeToggle<CR>",   { desc = "Toggle file tree" })
       vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>", { desc = "Find current file in tree" })
 
     '';
