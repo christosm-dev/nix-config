@@ -3,9 +3,6 @@
 # Contains packages, tools and settings that are host-agnostic.
 { pkgs, ... }: {
 
-  # Allow proprietary packages where needed
-  nixpkgs.config.allowUnfree = true;
-
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
 
