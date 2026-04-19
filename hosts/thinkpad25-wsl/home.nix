@@ -19,13 +19,6 @@
   # Changing it may trigger breaking changes in module defaults.
   home.stateVersion = "23.11";
 
-  # Docker - installed as user packages on WSL2
-  # systemd integration handled by WSL2
-  home.packages = with pkgs; [
-    docker
-    docker-compose
-  ];
-
   # Bash — WSL2-specific shell initialisation
   # Adds Nix profile to PATH and sources Home Manager session variables.
   # This is required because the standard Nix shell integration script
@@ -34,11 +27,6 @@
     # Nix PATH fix for multi-user install on WSL2
     export PATH="$HOME/.nix-profile/bin:$PATH"
     source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-
-    # Start Docker daemon if not running
-    if ! pgrep -x "dockerd" > /dev/null; then
-      sudo dockerd > /dev/null 2>&1 &
-    fi
   '';
 
   # Neovim — WSL2-specific overrides
