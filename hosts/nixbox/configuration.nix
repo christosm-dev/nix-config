@@ -22,11 +22,21 @@
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
 
+  # Docker - runs as a system service
+  # cm user is added to docker group for non-root access
+  virtualisation.docker = {
+    enable = true;
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
+  };
+
   # User account
   # Password is set separately with passwd after first boot
   users.users.cm = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.bash;
   };
 
