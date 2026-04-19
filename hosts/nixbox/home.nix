@@ -4,6 +4,9 @@
 # username and homeDirectory are inferred automatically by NixOS Home Manager module.
 { pkgs, ... }: {
 
+  home.username = "cm";
+  home.homeDirectory = "/home/cm";
+
   home.stateVersion = "24.11";
 
   # No host-specific overrides needed yet.

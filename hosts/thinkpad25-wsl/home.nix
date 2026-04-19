@@ -12,6 +12,10 @@
   home.username = "xmixa";
   home.homeDirectory = "/home/xmixa";
 
+  # Keep this at the version when Home Manager was first installed.
+  # Changing it may trigger breaking changes in module defaults.
+  home.stateVersion = "23.11";
+
   # Bash — WSL2-specific shell initialisation
   # Adds Nix profile to PATH and sources Home Manager session variables.
   # This is required because the standard Nix shell integration script

@@ -3,13 +3,6 @@
 # Contains packages, tools and settings that are host-agnostic.
 { pkgs, ... }: {
 
-  home.username = "xmixa";
-  home.homeDirectory = "/home/xmixa";
-
-  # Keep this at the version when Home Manager was first installed.
-  # Changing it may trigger breaking changes in module defaults.
-  home.stateVersion = "23.11";
-
   # Allow proprietary packages where needed
   nixpkgs.config.allowUnfree = true;
 
