@@ -3,6 +3,7 @@
 # Headless local dev server, accessed via SSH only.
 # Apply with: sudo nixos-rebuild switch --flake .#nixbox
 { config, pkgs, ... }: {
+  nixpkgs.config.allowUnfree = true; 
 
   imports = [
     ./hardware-configuration.nix  # generated during nixos-install
