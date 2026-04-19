@@ -12,6 +12,11 @@
     withRuby = false;      # disabled - not needed for current workflow
     withPython3 = false;   # disabled - not needed for current workflow
 
+    plugins = with pkgs.vimPlugins; [
+      nvim-tree-lua
+      nvim-web-devicons  # icons for nvim-tree
+    ];
+
     initLua = ''
       -- Indentation
       -- All values set consistently to avoid mixed tab/space behaviour
@@ -88,6 +93,25 @@
         "lua_ls",
         "dockerls",
       })
+
+      -- nvim-tree
+      require("nvim-tree").setup({
+        view = {
+          width = 30,
+          side = "left",
+        },
+        renderer = {
+          group_empty = true,
+        },
+        filters = {
+          dotfiles = false,
+        },
+      })
+
+      -- nvim-tree keymaps
+      vim.keymap.set("n", "<leader>e",  ":NvimTreeToggle<CR>",   { desc = "Toggle file tree" })
+      vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>", { desc = "Find current file in tree" })
+
     '';
   };
 
