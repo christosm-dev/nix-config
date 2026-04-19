@@ -9,6 +9,12 @@
 
   home.stateVersion = "24.11";
 
-  # No host-specific overrides needed yet.
+  # Fix headless boot - disable NetworkManager wait online service
+  # which can block boot when no display is connected
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  # Ensure network is brought up regardless of display connection
+  networking.networkmanager.wait-online.enable = false;
+
   # Common config is inherited from modules/common.nix and modules/neovim.nix.
 }
