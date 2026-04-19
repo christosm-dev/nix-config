@@ -3,7 +3,8 @@
 # Headless local dev server, accessed via SSH only.
 # Apply with: sudo nixos-rebuild switch --flake .#nixbox
 { config, pkgs, ... }: {
-  nixpkgs.config.allowUnfree = true; 
+
+  nixpkgs.config.allowUnfree = true;
 
   imports = [
     ./hardware-configuration.nix  # generated during nixos-install
@@ -24,6 +25,7 @@
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # Fix headless boot - disable NetworkManager wait online service
+  # which can block boot when no display is connected
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Timezone and locale
