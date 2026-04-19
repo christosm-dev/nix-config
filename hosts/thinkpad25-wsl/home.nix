@@ -9,6 +9,9 @@
 #    Neovim — stripped automatically via BufReadPost autocmd.
 { pkgs, ... }: {
 
+  # Allow proprietary packages where needed
+  nixpkgs.config.allowUnfree = true;
+
   home.username = "xmixa";
   home.homeDirectory = "/home/xmixa";
 
