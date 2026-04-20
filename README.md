@@ -15,10 +15,12 @@ Declarative home environment using [Nix](https://nixos.org/) and
 └── hosts/
     ├── thinkpad25-wsl/
     │   └── home.nix                    # WSL2-specific overrides
-    └── nixbox/
-        ├── configuration.nix           # NixOS system configuration
-        ├── hardware-configuration.nix  # Generated during install
-        └── home.nix                    # nixbox-specific Home Manager overrides
+    ├── nixbox/
+    │   ├── configuration.nix           # NixOS system configuration
+    │   ├── hardware-configuration.nix  # Generated during install
+    │   └── home.nix                    # nixbox-specific Home Manager overrides
+    └── contabo-vps/
+        └── home.nix                    # VPS-specific Home Manager overrides
 ```
 
 ## Hosts
@@ -27,6 +29,7 @@ Declarative home environment using [Nix](https://nixos.org/) and
 |------|------|------|--------|
 | `xmixa@thinkpad25` | WSL2 standalone Home Manager | xmixa | x86_64-linux |
 | `nixbox` | NixOS + Home Manager module | cm | x86_64-linux |
+| `christos@contabo-vps` | VPS standalone Home Manager | christos | x86_64-linux |
 
 ## Bootstrap — WSL2
 
@@ -135,6 +138,51 @@ git clone https://github.com/christosm-dev/nix-config.git ~/.config/home-manager
 sudo nixos-rebuild switch --flake ~/.config/home-manager#nixbox
 ```
 
+## Bootstrap — Contabo VPS
+
+### Prerequisites
+
+- SSH access to the VPS
+- SSH key at `~/.ssh/id_ed25519` configured for GitHub
+
+### 1. Install Nix (multi-user)
+
+```bash
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+### 2. Enable flakes
+
+```bash
+echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
+sudo systemctl restart nix-daemon
+```
+
+### 3. Add Nix to PATH
+
+```bash
+echo 'export PATH="$HOME/.nix-profile/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 4. Clone repo
+
+```bash
+git clone https://github.com/christosm-dev/nix-config.git ~/.config/home-manager
+```
+
+### 5. Apply configuration
+
+```bash
+nix run nixpkgs#home-manager -- switch -b backup --flake ~/.config/home-manager#"christos@contabo-vps"
+```
+
+### 6. Reload shell
+
+```bash
+source ~/.bashrc
+```
+
 ## Usage
 
 ```bash
@@ -143,4 +191,7 @@ home-manager switch --flake ~/.config/home-manager#"xmixa@thinkpad25"
 
 # Apply config changes on nixbox
 sudo nixos-rebuild switch --flake ~/.config/home-manager#nixbox
+
+# Apply config changes on Contabo VPS
+home-manager switch --flake ~/.config/home-manager#"christos@contabo-vps"
 ```
