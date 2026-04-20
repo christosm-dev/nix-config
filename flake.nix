@@ -34,6 +34,17 @@
           ];
         };
 
+        # Contabo VPS - christosm.dev portfolio server
+        # Docker and Traefik managed outside Nix
+        "christos@contabo-vps" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./modules/common.nix
+            ./modules/neovim.nix
+            ./hosts/contabo-vps/home.nix
+          ];
+        };
+
       };
 
       # NixOS system configurations
