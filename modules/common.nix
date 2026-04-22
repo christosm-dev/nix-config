@@ -19,6 +19,7 @@
     terraform  # Terraform
     usbutils
     unzip
+    inetutils
   ];
 
   # Bash — aliases, history and environment
