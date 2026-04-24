@@ -64,14 +64,14 @@
 
   # GNOME desktop — optional UI when monitor is connected
   # Headless operation unaffected; GDM waits for display
-  services.xserver = {
+  services.xserver.enable = true;
+
+  services.displayManager.gdm = {
     enable = true;
-    displayManager.gdm = {
-      enable = true;
-      autoSuspend = false;  # prevent sleep when no user logged in
-    };
-    desktopManager.gnome.enable = true;
+    autoSuspend = false;
   };
+
+  services.desktopManager.gnome.enable = true;
 
   # Required for GNOME to function correctly
   services.dbus.enable = true;
