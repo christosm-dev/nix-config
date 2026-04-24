@@ -62,6 +62,28 @@
     };
   };
 
+  # GNOME desktop — optional UI when monitor is connected
+  # Headless operation unaffected; GDM waits for display
+  services.xserver = {
+    enable = true;
+    displayManager.gdm = {
+      enable = true;
+      autoSuspend = false;  # prevent sleep when no user logged in
+    };
+    desktopManager.gnome.enable = true;
+  };
+
+  # Required for GNOME to function correctly
+  services.dbus.enable = true;
+  programs.dconf.enable = true;
+
+  # Audio — GNOME expects PipeWire
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+
   # Open SSH port in firewall
   networking.firewall.allowedTCPPorts = [ 22 ];
 
@@ -71,7 +93,8 @@
     git
     curl
     wget
-    vim  # fallback editor before home-manager is applied
+    vim        # fallback editor before home-manager is applied
+    obsidian   # knowledge graph UI — Electron, requires allowUnfree
   ];
 
   # Nix settings
