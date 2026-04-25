@@ -111,4 +111,6 @@
   };
 
   system.stateVersion = "24.11";
+
+  hardware.logitech.wireless.enable = true;
 }
