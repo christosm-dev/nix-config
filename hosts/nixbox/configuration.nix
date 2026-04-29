@@ -81,7 +81,9 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   # Open SSH port in firewall
@@ -113,14 +115,6 @@
   system.stateVersion = "24.11";
 
   hardware.logitech.wireless.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  };
 
   # Disable PulseAudio if it was enabled
   hardware.pulseaudio.enable = false;
