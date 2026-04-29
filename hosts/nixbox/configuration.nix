@@ -28,7 +28,7 @@
   # which can block boot when no display is connected
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  systemd.sleep.extraConfig = ''
+  systemd.sleep.settings.Sleep = ''
     AllowSuspend=no
     AllowHibernation=no
   '';
