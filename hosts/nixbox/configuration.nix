@@ -124,7 +124,7 @@
   hardware.logitech.wireless.enable = true;
 
   # Disable PulseAudio if it was enabled
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   # Enable Bluetooth HFP
   services.pipewire.wireplumber.extraConfig = {
