@@ -28,10 +28,12 @@
   # which can block boot when no display is connected
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  systemd.sleep.settings.Sleep = ''
-    AllowSuspend=no
-    AllowHibernation=no
-  '';
+  systemd.sleep.settings = {
+    Sleep = {
+      AllowSuspend = false;
+      AllowHibernation = false;
+    };
+  }; 
 
   # Timezone and locale
   time.timeZone = "Europe/London";
