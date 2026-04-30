@@ -1,8 +1,7 @@
-# flake.nix
-# Entrypoint for the nix-config flake.
-# Defines all host configurations and wires together shared modules.
-# WSL2:   home-manager switch --flake .#"xmixa@thinkpad25"
-# NixOS:  sudo nixos-rebuild switch --flake .#nixbox
+# WSL2:      home-manager switch --flake .#"xmixa@thinkpad25"
+# NixOS:     sudo nixos-rebuild switch --flake .#nixbox
+# T490s:     sudo nixos-rebuild switch --flake .#thinkpad-t490s
+# VPS:       home-manager switch --flake .#"christos@contabo-vps"
 {
   description = "xmixa home-manager configuration";
 
@@ -48,6 +47,7 @@
       };
 
       # NixOS system configurations
+      # Nixbox - desktop workstation with GNOME
       nixosConfigurations = {
 
         # Headless local dev server
@@ -57,7 +57,6 @@
             ./hosts/nixbox/configuration.nix
             home-manager.nixosModules.home-manager
             {
-              # Home Manager wired into NixOS module system
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.cm = {
@@ -71,6 +70,25 @@
           ];
         };
 
+        # ThinkPad T490s - desktop workstation with GNOME
+        thinkpad-t490s = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/thinkpad-t490s/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.cm = {
+                imports = [
+                  ./modules/common.nix
+                  ./modules/neovim.nix
+                  ./hosts/thinkpad-t490s/home.nix
+                ];
+              };
+            }
+          ];
+        };
       };
     };
 }
