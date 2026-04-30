@@ -75,6 +75,10 @@
       git_branch = {
         format = "on [($branch)](bold purple) ";
       };
+      python = {
+        detect_extensions = [];
+        detect_files = ["pyproject.toml" "requirements.txt" "Pipfile" ".python-version"];
+      };
     };
   };
 
