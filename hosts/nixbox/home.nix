@@ -6,6 +6,9 @@
 
   home.stateVersion = "24.11";
 
-  # No host-specific overrides needed yet.
+  home.packages = with pkgs; [
+    nodejs_22
+  ];
+
   # Common config is inherited from modules/common.nix and modules/neovim.nix.
 }

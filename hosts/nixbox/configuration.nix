@@ -138,4 +138,5 @@
     };
   };
 
+  programs.firefox.enable = true;
 }
