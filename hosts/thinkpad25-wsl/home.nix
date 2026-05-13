@@ -21,6 +21,7 @@
 
   # home.nix — Docker CLI via Nix
   home.packages = with pkgs; [
+    uv
     docker
     docker-compose
   ];
