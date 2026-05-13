@@ -19,6 +19,12 @@
   # Changing it may trigger breaking changes in module defaults.
   home.stateVersion = "23.11";
 
+  # home.nix — Docker CLI via Nix
+  home.packages = with pkgs; [
+    docker
+    docker-compose
+  ];
+
   # Bash — WSL2-specific shell initialisation
   # Adds Nix profile to PATH and sources Home Manager session variables.
   # This is required because the standard Nix shell integration script
