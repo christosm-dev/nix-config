@@ -24,6 +24,7 @@
     uv
     docker
     docker-compose
+    tree
   ];
 
   # Bash — WSL2-specific shell initialisation
